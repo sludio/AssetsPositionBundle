@@ -1,0 +1,16 @@
+services:
+    assets_position.position.orm:
+        class: Assets\PositionBundle\Services\PositionHandler
+        public: false
+        arguments:
+            entityManager: "@doctrine.orm.entity_manager"
+        calls:
+            - [ 'setPositionField', [%assets.position.position.field%]]
+
+    assets_position.twig.extension:
+        class: Assets\PositionBundle\Twig\ObjectPositionExtension
+        arguments:
+            - "@assets_position.position"
+        public: false
+        tags:
+            - { name: twig.extension }

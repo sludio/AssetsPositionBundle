@@ -1,0 +1,43 @@
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') %}
+    {% set assets_position = positionObject(object) %}
+
+    {% if assets_position < admin.last_position %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}">
+            ⇊
+        </a>
+    {% else %}
+        <a class="btn btn-sm btn-default" disabled href="javascript:;">
+            ⇊
+        </a>
+    {% endif %}
+
+    {% if assets_position < admin.last_position %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}">
+            ↓
+        </a>
+    {% else %}
+        <a class="btn btn-sm btn-default" disabled href="javascript:;">
+            ↓
+        </a>
+    {% endif %}
+
+    {% if assets_position > 0 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}">
+            ↑
+        </a>
+    {% else %}
+        <a class="btn btn-sm btn-default" disabled href="javascript:;">
+            ↑
+        </a>
+    {% endif %}
+
+    {% if assets_position > 0 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}">
+            ⇈
+        </a>
+    {% else %}
+        <a class="btn btn-sm btn-default" disabled href="javascript:;">
+            ⇈
+        </a>
+    {% endif %}
+{% endif %}
